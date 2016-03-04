@@ -4,7 +4,8 @@
   "description": "2-phase-commit example",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint lib/**/*.js",
+    "test": "babel-node index.js | ./node_modules/.bin/bunyan -o short"
   },
   "author": {
     "name": "Rolly Fordham",

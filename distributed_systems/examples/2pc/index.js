@@ -6,6 +6,7 @@ import Cohort from './lib/cohort.js';
 
 const log = bunyan.createLogger({ name: '2pc' });
 const numCohorts = 4;
+let nodes = [];
 
 const timesAux = (timesLeft, f) => {
   if (timesLeft <= 0) {
@@ -18,8 +19,17 @@ const timesAux = (timesLeft, f) => {
 
 const times = (n, f) => timesAux(n, f);
 
+function shutdown() {
+  log.info('Shutting down...');
+
+  Promise.all(
+    nodes.map(node => node.shutdown())
+  ).then(() => {
+    log.info('All done. Goodbye :-)');
+  });
+}
+
 function setupCoordinator(driver) {
-  log.info('setting up Coordinator');
   // 2 cohorts, so 3 nodes total including the coordinator.
   const coordinator = new Coordinator(driver, numCohorts, { log: log.child() });
 
@@ -35,6 +45,8 @@ function setupCoordinator(driver) {
 
     // TODO completes the operation, and releases all the locks and
     // resources held during the transaction.
+
+    shutdown();
   });
 
   coordinator.on('abort', (err) => {
@@ -46,11 +58,11 @@ function setupCoordinator(driver) {
     // TODO undo the transaction and release any resources
   });
 
+  nodes.push(coordinator);
   return Promise.resolve(coordinator);
 }
 
 function setupCohort(driver) {
-  log.info('setting up Cohort');
   const cohort = new Cohort(driver, { log: log.child() });
 
   cohort.on('proposal', (proposal) => {
@@ -89,11 +101,14 @@ function setupCohort(driver) {
     // resources held during the transaction.
   });
 
+  nodes.push(cohort);
   return Promise.resolve(cohort);
 }
 
 
 const setupSystem = () => {
+  log.info(`Attempting to setup a system of 1 static coordinator and ${numCohorts} cohorts...`);
+
   const maybeSystem = [
     NatsDriver.connect({ port: 4222 }).then(setupCoordinator),
   ];
@@ -113,15 +128,7 @@ setupSystem().catch((err) => {
   log.info(`SYSTEM CONNECTED: coordinator (${coordinator.id}) and cohorts ` +
                   `(${cohorts.map((c) => c.id).join(', ')})`);
 
-  process.once('SIGINT', () => {
-    log.info('Shutting down...');
-
-    Promise.all(
-      cohorts.map(cohort => cohort.shutdown())
-    ).then(() => coordinator.shutdown()).then(() => {
-      log.info('All done. Goodbye :-)');
-    });
-  });
+  process.once('SIGINT', shutdown);
 
 
   // TODO setup a transaction, write to undo/redo logs (en.wikipedia.org/wiki
