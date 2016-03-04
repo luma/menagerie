@@ -168,8 +168,8 @@ Each clock then updates it own counter, rather than the common one. The rules ar
 * Whenever a process does work, increment the logical clock value of the node in the vector
 * Whenever a process sends a message, include the full vector of logical clocks
 * When a message is received:
-* * update each element in the vector to be max(local, received)
-* * increment the logical clock value representing the current node in the vector
+- update each element in the vector to be max(local, received)
+- increment the logical clock value representing the current node in the vector
 
 ``` rust
 use uuid::Uuid;
