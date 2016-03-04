@@ -23,3 +23,5 @@ node_modules
 lib/
 examples/lib/
 tmp/logs
+
+.DS_Store
