@@ -56,13 +56,10 @@ Definition:
 All consensus methods must fulfill the following properties:
 * **Agreement**: all nodes in $N$ decide on the same value (safety property)
 * **Termination**: all non-faulty nodes eventually reach a decision (liveness property)
-* **Validity**: if all non-faulty processes device $v$, then $v$ must have been proposed by some node in $N$ (non-triviality property)
+* **Validity**: if all non-faulty nodes decide $v$, then $v$ must have been proposed by some node in $N$ (non-triviality property)
 * **Integrity**: every node in $N$ decides at most one value $v$, and $v$ is the "right" value (safety property)
 
 
-
-* http://bravenewgeek.com/understanding-consensus/
-* [Reaching Agreement in the Presence of Faults](http://research.microsoft.com/en-us/um/people/lamport/pubs/reaching.pdf)
 
 ### Two generals
 
@@ -417,3 +414,5 @@ From the [Replication](http://book.mixu.net/distsys/replication.html) section of
 * [Fault-tolerant Agreement in Synchronous Message-passing Systems](http://www.amazon.com/Fault-tolerant-Agreement-Synchronous-Message-passing-Distributed/dp/1608455254/)
 * [Stumbling over Consensus Research: Misunderstandings and Issues](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.174.8238&rep=rep1&type=pdf)
 * [Understanding Replication in Databases and Distributed Systems](http://www-users.cselabs.umn.edu/classes/Spring-2014/csci8980-sds/Papers/ProcessReplication/Understanding-Replication-icdcs2000.pdf)
+* [Understanding consensus](http://bravenewgeek.com/understanding-consensus/)
+* [Reaching Agreement in the Presence of Faults](http://research.microsoft.com/en-us/um/people/lamport/pubs/reaching.pdf)
