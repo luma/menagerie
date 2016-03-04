@@ -72,11 +72,9 @@ From https://en.wikipedia.org/wiki/Two_Generals_Problem:
 
 It's interesting to consider how the generals could agree on a time to attack (i.e. come to consensus).
 
-If one general would be considered the leader then they could send a message to the other general with the time that they wish to attack.
+If one general would be considered the leader then they could send a message to the other general with the time that they wish to attack. Once a message is sent the leader has no idea whether the second general has received it. If they assume that the second general has received it and attacks then they risk being the sole attacker.
 
-Once sent the leader has no idea whether the second general has received it. If they assume that the second general has received it and attacks then they risk being the sole attacker.
-
-The second general may send a messenger with an acknowledgement back to the leader, but that messenger may be captured and the acknowledgement lost. The second general can't know whether the messenger got through or not. Again, if they assume success and attack they risk being wiped out.
+Once the second general receives the order they may send a messenger back with an acknowledgement to the leader, but that messenger may be captured and the acknowledgement lost. The second general can't know whether the messenger got through or not. Again, if they assume success and attack they risk being wiped out.
 
 The leader could send an acknowledgement of the second generals acknowledgement. But this could also be lost. The pattern of sending messages and awaiting acknowledgements could continue forever knowing for certain that the messages got through.
 
