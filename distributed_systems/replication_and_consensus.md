@@ -156,7 +156,7 @@ Event with failover handling the primary is still a single point of failure, and
 
 * lost updates
 * incorrect updates
-* split-brain: i.e. where a backup to promoted to master (due to a network partition) when the master is still active
+* split-brain: i.e. where a backup to promoted to master (due to a network partition) when the master is still active and they work against each other. This leads to inconsistent state amongst the nodes as they get different results depending on which master they listen to
 
 Other methods (like 2-phase-commit) add extra rounds of messaging to strengthen their consistency guarantees.
 
