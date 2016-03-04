@@ -2,7 +2,7 @@
 
 My notes on various technical topics. These are being produced from an older version of my notes so this is very much WIP
 
-At this point the only section that is in here is [Distributed Systems](distributed_systems/README.md) which is also not complete.
+At this point the only section that is in here is [Distributed Systems](distributed_systems/) which is also not complete.
 
 
 ## Usage and feedback
