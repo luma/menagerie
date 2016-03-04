@@ -54,10 +54,11 @@ Definition:
 > Consensus is the problem of having a set of processes agree on a value proposed by one of those processes
 
 All consensus methods must fulfill the following properties:
-* **Agreement**: all nodes in $N$ decide on the same value (safety property).
+* **Agreement**: all nodes in $N$ decide on the same value (safety property)
 * **Termination**: all non-faulty nodes eventually reach a decision (liveness property)
-* **Validity**: if all non-faulty processes device $v$, then $v$ must have been proposed by some node in $N$ (non-triviality property).
+* **Validity**: if all non-faulty processes device $v$, then $v$ must have been proposed by some node in $N$ (non-triviality property)
 * **Integrity**: every node in $N$ decides at most one value $v$, and $v$ is the "right" value (safety property)
+
 
 
 * http://bravenewgeek.com/understanding-consensus/
