@@ -282,10 +282,11 @@ From page 1 of [Paxos made simple](#paxos_made_simple):
 
 #### Terminology
 
-Different papers tend to use different terminology for the same concepts. Below is a mapping of the core Paxos terms to the ones from the previous sections.
+Different papers and techniques tend to use different terminology for the same concepts. Below are the terms that Paxos uses.
 
 * **Proposer**: the coordinator or master
 * **Acceptors**: the cohorts in multi-phase speak
+* **Learner**: learners are advised of results committed by acceptors
 
 #### Protocol
 
@@ -293,16 +294,24 @@ The core of Paxos is actually rather similar to 2-phase-commit. At a high level 
 
 1. proposer (coordinator) sends a proposal to all of the acceptors
 2. once the acceptors have agreed on the proposal the proposer sends a commit request to the acceptors
-3. each acceptor commits the value and informs the proposer
+3. each acceptor commits the value and informs the learner
 4. once enough acceptors have advised the proposer that the value is committed the protocol terminates
 
 Paxos differs from 2PC in when a acceptor may accept a proposal and what value the proposer is allowed to eventually request for acceptance.
 
 Another difference is that in Paxos there may be multiple proposers suggesting values at the same time. The protocol deals with this although it can be worth limiting the number of possible proposers (if possible) as too many can increase the time it takes to reach consensus.
 
+A node in paxos can take on any or all of the three possible roles: proposer, acceptor, or learner. In most of the examples and diagrams below we assume a single node only takes a single role...less confusing that way.
+
+![Basic Paxos architecture](images/paxos_architecture.png)
+
+
+
 ##### Determining ordering of proposals
 
 One of the issues that multi-phase commit has is that cohorts being promoted when the coordinator is Fail-recover can cause split-brain and inconsistent state within the system (See an [example of this](#3pc_network_partition)). Paxos eliminates these types of issues by establishing a total order among proposals by tagging them with sequence numbers.
+
+Sequence numbers must be a positive natural number. They must also be monotonically increasing and unique with respect to other proposers’ proposal numbers.
 
 This allows acceptors and proposers to order proposals and know which are the newest. Acceptors can reject messages from old coordinators and them from disrupting consensus once it's achieved.
 
@@ -324,23 +333,47 @@ From Majorities in [Consensus Protocols: Paxos](http://the-paper-trail.org/blog/
 
 ##### Learner nodes
 
+**TODO**: What? guarantees? how many should we have? what happens if there is more than one learner node and not all receive the messages from the acceptors
 
+##### Walkthrough
+
+![Paxos Prepare Phase](images/paxos_prepare.png)
+
+1. Proposer A sends a **prepare** message with a sequence number (n) of 2 and a value of 8
+2. Proposer B sends a **prepare** message with n=4 and a value of 8
+3. Acceptor X and Y receives Proposer A's proposal (n=2) first, accepts it, and agrees to not accept any proposals that are older than n=2
+4. Acceptor X and Y receives Proposers B's proposal (n=4), accepts it, agrees not to accept any proposals that are older than n=4, and responds with the previously seen proposal (A's)
+5. Acceptor Z receives Proposer B's proposal (n=4), accepts it, and agrees to not accept any proposals that are older than n=4
+6. Acceptor Z receives Proposer A's proposal (n=2), rejects it, but the reply is lost
+
+![Paxos Accept Phase](images/paxos_accept.png)
+
+1. As A has seen prepare responses from a majority of nodes (it never received Z's response) it can send an accept request. It sends an accept request to every acceptor with the highest seen proposal number (n=2) and value of 8
+2. A's request is ignore by the nodes as it's proposal number is not the highest one that it's seen (n=4)
+3. B sends an accept request to all nodes with the highest proposal number that it's seen (n=4) and value associated with the highest proposal number among the prepare responses it saw (v=8, note that this is the value that A proposed)
+4. B's request is accepted by all the nodes  as it's proposal number is higher or equal to the number that it's already seen
+5. As each acceptor accepts the value it sends it to the learner nodes.
+
+As this point the system has reached consensus on a value of 8 and Paxos is complete.
 
 
 #### Multi-paxos
 
-
+**TODO**
 
 #### Cheap Paxos
 
+**TODO**
 * https://en.wikipedia.org/wiki/Paxos_(computer_science)#Cheap_Paxos
 
 #### Fast Paxos
 
+**TODO**
 * https://en.wikipedia.org/wiki/Paxos_(computer_science)#Fast_Paxos
 
 #### Generalized Paxos
 
+**TODO**
 * https://en.wikipedia.org/wiki/Paxos_(computer_science)#Generalized_Paxos
 
 
@@ -379,6 +412,7 @@ From Majorities in [Consensus Protocols: Paxos](http://the-paper-trail.org/blog/
 * http://videlalvaro.github.io/2015/12/gossip-protocols.html
 * https://greta.io/documentation/gossip
 * http://blog.dshr.org/2014/11/gossip-protocols-clarification.html
+
 
 
 
