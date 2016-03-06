@@ -340,7 +340,7 @@ Paxos solves this by having the acceptors not commit the accepted values, instea
 [On some subtleties of Paxos](http://the-paper-trail.org/blog/on-some-subtleties-of-paxos/) has some good info on the role that learners play. Pay special attention to the "Conditions for learner commit" and "Fault tolerance" sections.
 
 
-**TODO**: guarantees? how many should we have? can learners become a SPOF? what happens if there is more than one learner node and not all receive the messages from the acceptors? what if all acceptors are also learners? what if all proposers are also learners?
+**TODO**: guarantees? how many should we have? can learners become a SPOF? what happens if there is more than one learner node and not all receive the messages from the acceptors? (i.e. inconsistency among learners) what if all acceptors are also learners? what if all proposers are also learners?
 
 
 ##### Walkthrough
