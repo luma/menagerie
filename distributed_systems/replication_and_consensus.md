@@ -286,7 +286,7 @@ Different papers and techniques tend to use different terminology for the same c
 
 * **Proposer**: the coordinator or master
 * **Acceptors**: the cohorts in multi-phase speak
-* **Learner**: learners are advised of results committed by acceptors
+* **Learner**: learners are advised of results by acceptors and are the ones that actually commit the values once they have received a specific value from a majority of acceptors
 
 #### Protocol
 
@@ -321,8 +321,6 @@ When a proposal arrives, the acceptor checks to see if the proposals sequence nu
 
 An important point about this system is that it allows the acceptors to agree on proposals **without** any extra communication. This helps with the consequences of us assuming an asynchronous system (see the [FLP Impossibility result](#flp_impossibility)).
 
-**TODO**: write a bit on how to generate/choose sequence numbers
-
 
 ##### Majorities
 
@@ -333,7 +331,17 @@ From Majorities in [Consensus Protocols: Paxos](http://the-paper-trail.org/blog/
 
 ##### Learner nodes
 
-**TODO**: What? guarantees? how many should we have? what happens if there is more than one learner node and not all receive the messages from the acceptors
+It is entirely possible for two different acceptors to accept completely different proposals, say because you have competing proposers that interleave their prepare phases and then crash after sending an accept to one node each.
+
+Paxos solves this by having the acceptors not commit the accepted values, instead they broadcast them to the learner nodes. The learner nodes role is to wait until it receives the same value from a majority of acceptors and then commit it. It's this majority that deals with multiple accepted values.
+
+**An important reminder**: in Paxos a node can embody one, some or all of the three possible roles (proposer, acceptor, learner). So an acceptor might also be a learner.
+
+[On some subtleties of Paxos](http://the-paper-trail.org/blog/on-some-subtleties-of-paxos/) has some good info on the role that learners play. Pay special attention to the "Conditions for learner commit" and "Fault tolerance" sections.
+
+
+**TODO**: guarantees? how many should we have? can learners become a SPOF? what happens if there is more than one learner node and not all receive the messages from the acceptors? what if all acceptors are also learners? what if all proposers are also learners?
+
 
 ##### Walkthrough
 
@@ -352,7 +360,8 @@ From Majorities in [Consensus Protocols: Paxos](http://the-paper-trail.org/blog/
 2. A's request is ignore by the nodes as it's proposal number is not the highest one that it's seen (n=4)
 3. B sends an accept request to all nodes with the highest proposal number that it's seen (n=4) and value associated with the highest proposal number among the prepare responses it saw (v=8, note that this is the value that A proposed)
 4. B's request is accepted by all the nodes  as it's proposal number is higher or equal to the number that it's already seen
-5. As each acceptor accepts the value it sends it to the learner nodes.
+5. As each acceptor accepts the value it sends it to the learner nodes
+6. Once a learner node has received a final value from the majority of acceptors then that value is committed. Note that it's possible for a single learner node to receive conflicting values from acceptors, which is why it's important that the learning waits for a **majority** of acceptors to signal the **same** value.
 
 As this point the system has reached consensus on a value of 8 and Paxos is complete.
 
@@ -391,12 +400,18 @@ As this point the system has reached consensus on a value of 8 and Paxos is comp
 
 ### <a name="raft">Raft</a>
 
+
+
 * http://raftconsensus.github.io/
 * http://the-paper-trail.org/blog/on-raft-briefly/
 * [Raft Refloated: Do we have consensus?](http://blog.acolyer.org/2015/03/13/raft-refloated-do-we-have-consensus/) - this is an overview of the paper
 * [Raft Refloated: Do We Have Consensus?](http://www.cl.cam.ac.uk/~ms705/pub/papers/2015-osr-raft.pdf)
+* http://thesecretlivesofdata.com/
+* Talk on Rust, Raft, and Distributed Systems: [Video](https://air.mozilla.org/bay-area-rust-meetup-august-2015/), and [Slides](https://raft.github.io/slides/rustdiego2015.pdf)
+* [Consensus: Bridging Theory and Practice](https://github.com/ongardie/dissertation) - Diego Ongaro's PhD dissertation
 
-### <a name="zab">ZAB></a>
+
+### <a name="zab">ZAB</a>
 
 
 * [Zookeeper Atomic Broadcast](http://web.stanford.edu/class/cs347/reading/zab.pdf)
@@ -404,16 +419,27 @@ As this point the system has reached consensus on a value of 8 and Paxos is comp
 * [ZooKeeper’s Atomic Broadcast Protocol: Theory and Practice](http://blog.acolyer.org/2015/03/10/zookeepers-atomic-broadcast-protocol-theory-and-practice/)
 
 
+### <a name='generating_sequence_numbers'>Generating Sequence Numbers</a>
+
+From [Consensus Protocols: Paxos](http://the-paper-trail.org/blog/consensus-protocols-paxos/)
+> How can we ensure that all proposals are uniquely numbered? The easiest way is to have all proposers draw from disjoint sets of sequence numbers. In particular, one practical way is to construct a pair `(sequenceNumber, address)` where the address value is the proposer’s unique network address. These pairs can be totally ordered and at the same time all proposers can ‘outbid’ all others if they choose a sufficiently large sequence number.
+>
+>The sets are not ranges of numbers but interleaved sets. One example (perhaps a bad one) would be a 64bits padded version of the sequence counter followed by 32bits taken from the ipaddress.
+>
+>Those numbers won’t collide between proposers on different hosts but it’s easy to pick a higher number for the next proposal by using +1 to the last highest sequence number observed.
+
+**@TODO More specific examples**
+
 ## Gossip Protocols
+
+
 
 * https://en.wikipedia.org/wiki/Gossip_protocol
 * Anti-entropy protocols?
-* http://highscalability.com/blog/2011/11/14/using-gossip-protocols-for-failure-detection-monitoring-mess.html
+* [Using Gossip Protocols for Failure Detection, Monitoring, Messaging and Other Good Things](http://highscalability.com/blog/2011/11/14/using-gossip-protocols-for-failure-detection-monitoring-mess.html)
 * http://videlalvaro.github.io/2015/12/gossip-protocols.html
 * https://greta.io/documentation/gossip
 * http://blog.dshr.org/2014/11/gossip-protocols-clarification.html
-
-
 
 
 ### Epidemic Broadcast Trees
@@ -423,7 +449,6 @@ As this point the system has reached consensus on a value of 8 and Paxos is comp
 * [Controlled Epidemics: Riak's New Gossip Protocol and Metadata Store (Jordan West) - RICON West 2013](https://www.youtube.com/watch?v=s4cCUTPU8GI)
 
 ## CALM: consistency as logical monotonicity
-
 
 * http://bloom-lang.net/calm/
 * [Consistency Analysis in Bloom: a CALM and Collected
