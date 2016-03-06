@@ -1,7 +1,9 @@
 # Consistency, availability, and partition tolerance
 
-http://book.mixu.net/distsys/intro.html
-https://github.com/henryr/cap-faq
+* http://book.mixu.net/distsys/intro.html
+* https://github.com/henryr/cap-faq
+* [Consistency, Availability, and Convergence](http://blog.acolyer.org/2014/10/10/consistency-availability-and-convergence/) - summary of the paper
+* [Consistency, Availability, and Convergence](http://www.cs.utexas.edu/users/dahlin/papers/cac-tr.pdf)
 
 ## Partition tolerance
 
