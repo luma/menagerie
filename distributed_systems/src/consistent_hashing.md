@@ -1,3 +1,3 @@
 # Consistent hashing
 
-https://github.com/mixu/vnodehash
+* https://github.com/mixu/vnodehash
