@@ -7,9 +7,10 @@
   "main": "lib/index.js",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
+    "start": "open book/distributed_systems/index.html",
+    "build": "cd distributed_systems/ && mdbook build .",
     "lint": "eslint examples/**/*.js",
-    "2pc": "babel-node examples/2pc/index.js | ./node_modules/.bin/bunyan",
-    "build": "cd distributed_systems/ && mdbook build ."
+    "2pc": "babel-node examples/2pc/index.js | ./node_modules/.bin/bunyan"
   },
   "author": {
     "name": "Rolly Fordham",
