@@ -8,7 +8,8 @@
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "lint": "eslint examples/**/*.js",
-    "2pc": "babel-node examples/2pc/index.js | ./node_modules/.bin/bunyan"
+    "2pc": "babel-node examples/2pc/index.js | ./node_modules/.bin/bunyan",
+    "build": "cd distributed_systems/ && mdbook build ."
   },
   "author": {
     "name": "Rolly Fordham",

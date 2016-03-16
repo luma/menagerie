@@ -54,10 +54,10 @@ Definition:
 > Consensus is the problem of having a set of processes agree on a value proposed by one of those processes
 
 All consensus methods must fulfill the following properties:
-* **Agreement**: all nodes in $N$ decide on the same value (safety property)
+* **Agreement**: all nodes in \\( N \\) decide on the same value (safety property)
 * **Termination**: all non-faulty nodes eventually reach a decision (liveness property)
-* **Validity**: if all non-faulty nodes decide $v$, then $v$ must have been proposed by some node in $N$ (non-triviality property)
-* **Integrity**: every node in $N$ decides at most one value $v$, and $v$ is the "right" value (safety property)
+* **Validity**: if all non-faulty nodes decide \\( v \\), then \\( v \\) must have been proposed by some node in \\( N \\) (non-triviality property)
+* **Integrity**: every node in \\( N \\) decides at most one value \\( v \\), and \\( v \\) is the "right" value (safety property)
 
 
 
@@ -167,8 +167,8 @@ Other methods (like 2-phase-commit) add extra rounds of messaging to strengthen 
 
 2PC could be simplified to:
 
-1. The coordinator node contacts every other node, suggests a value, and gathers their responses ($proposal$ phase, $commit-request$ phase, or $voting$ phase)
-2. The coordinator nodes all nodes again. If all the nodes agreed then the coordinator tells the nodes to $commit$, otherwise tell the nodes $abort$ ($commit$-$or$-$abort$ phase)
+1. The coordinator node contacts every other node, suggests a value, and gathers their responses ($proposal \\) phase, \\( commit-request \\) phase, or \\( voting \\) phase)
+2. The coordinator nodes all nodes again. If all the nodes agreed then the coordinator tells the nodes to \\( commit \\), otherwise tell the nodes \\( abort \\) ($commit$-$or$-$abort \\) phase)
 
 The coordinator doesn't need to be elected, any node can kick off a round of 2PC.
 
@@ -193,9 +193,9 @@ An * next to the record type means that the record is forced to stable storage.
 
 2PC is a CA protocol so it does not tolerate network partitions. It's also a blocking protocol. If the coordinator fails permanently then some of the cohorts may not complete their transactions as they will be waiting on the coordinator to take some action.
 
-If the coordinator is in the $proposal$ phase and crashes after sending proposals to some of the cohorts then those cohorts will be blocked until the coordinator recovers.
+If the coordinator is in the \\( proposal \\) phase and crashes after sending proposals to some of the cohorts then those cohorts will be blocked until the coordinator recovers.
 
-If the coordinator is in the $commit$-$or$-$abort$ phase and crashes then every cohort will stall until they receive either a commit or a rollback.
+If the coordinator is in the \\( commit$-$or$-$abort \\) phase and crashes then every cohort will stall until they receive either a commit or a rollback.
 
 In both of these scenarios the coordinator remaining down could mean that the system can't begin another round of 2PC.
 
@@ -260,7 +260,7 @@ Rather than requiring all participants to reply before committing these approach
 From http://book.mixu.net/distsys/replication.html
 > Partition tolerant consensus algorithms use an odd number of nodes (e.g. 3, 5 or 7). With just two nodes, it is not possible to have a clear majority after a failure. For example, if the number of nodes is three, then the system is resilient to one node failure; with five nodes the system is resilient to two node failures.
 
-In fact, even if the system was partitioned into several smaller systems the largest system (the majority) was still be able to function. The minority nodes would have to stop accepting writes to avoid diverging but would be able to rejoin the quorum if the partition heals.
+In fact, even if the system was partitioned into several smaller systems the largest system, assuming that it contains a majority of the pre-partitioned nodes, would still be able to function. The minority nodes would have to stop accepting writes to avoid diverging but would be able to rejoin the quorum if the partition heals.
 
 ### Sacrificing availability (liveness) for consistency
 
@@ -335,9 +335,14 @@ It is entirely possible for two different acceptors to accept completely differe
 
 Paxos solves this by having the acceptors not commit the accepted values, instead they broadcast them to the learner nodes. The learner nodes role is to wait until it receives the same value from a majority of acceptors and then commit it. It's this majority that deals with multiple accepted values.
 
-**An important reminder**: in Paxos a node can embody one, some or all of the three possible roles (proposer, acceptor, learner). So an acceptor might also be a learner.
+**An important reminder**: in Paxos a node can embody one, some, or all of the three possible roles (proposer, acceptor, learner). So an acceptor might also be a learner.
 
-[On some subtleties of Paxos](http://the-paper-trail.org/blog/on-some-subtleties-of-paxos/) has some good info on the role that learners play. Pay special attention to the "Conditions for learner commit" and "Fault tolerance" sections.
+From "Conditions for learner commit" on [On some subtleties of Paxos](http://the-paper-trail.org/blog/on-some-subtleties-of-paxos/)  
+> What this theorem shows is that once a value has been accepted by a majority of acceptors, no proposal can change it. The sequence number might change (consider what happens if a new proposer comes along and runs another proposal over the same instance – the sequence number will increase at some acceptors, but the proposer must choose the majority value for its accept message). But since the majority-accepted value will never change, the learners can commit a value when they hear it from a majority of acceptors.
+
+
+That page has other good info on the role that learners play. Pay special attention to the "Conditions for learner commit" and "Fault tolerance" sections.
+
 
 
 **TODO**: guarantees? how many should we have? can learners become a SPOF? what happens if there is more than one learner node and not all receive the messages from the acceptors? (i.e. inconsistency among learners) what if all acceptors are also learners? what if all proposers are also learners?
@@ -432,21 +437,100 @@ From [Consensus Protocols: Paxos](http://the-paper-trail.org/blog/consensus-prot
 
 ## Gossip Protocols
 
+Aka: epidemic protocols.
+
+>The concept of gossip communication can be illustrated by the analogy of office workers spreading rumors. Let's say each hour the office workers congregate around the water cooler. Each employee pairs off with another, chosen at random, and shares the latest gossip. At the start of the day, Alice starts a new rumor: she comments to Bob that she believes that Charlie dyes his mustache.
+>
+>At the next meeting, Bob tells Dave, while Alice repeats the idea to Eve. After each water cooler rendezvous, the number of individuals who have heard the rumor roughly doubles (though this doesn't account for gossiping twice to the same person; perhaps Alice tries to tell the story to Frank, only to find that Frank already heard it from Dave).
+>
+>The power of gossip lies in the robust spread of information. Even if Dave had trouble understanding Bob, he will probably run into someone else soon and can learn the news that way.
+
+Fundamentally, gossip protocols involve periodically contacting some subset of nodes and exchanging information with them. Gossip does not assume reliable communication and there is implicit redundancy in the replication because multiple nodes may attempt to share the same gossip to a specific node. This makes them nicely fault-tolerant and robust at the cost of extra messaging overhead.
+
+Nodes are classified as infected, susceptible, and removed.
+* **infected**: tries to spread new info periodically by exchanges with peers
+* **susceptible**: doesn't know about the info that is being spread. So it can be inflected
+* **removed**: already knows the info that is being spread around but is not spreading it (i.e. they may have no more peers to exchange with).
+
+If the language used makes it sound almost like a virus being spread then that's because early researchers on Gossip protocols studied how a disease disseminates in a population. This is also why the alternative name for Gossip protocols is Epidemic protocols.
 
 
-* https://en.wikipedia.org/wiki/Gossip_protocol
-* Anti-entropy protocols?
+Gossip protocols are actually very common. For example the Internet's routing protocols have gossip like behaviour.
+
+### <a name='which_nodes'>How to choose which nodes to contact</a>
+
+Fundamentally, gossip protocols involve periodically contacting some subset of nodes, either from the total set of nodes, or from the set of neighbours, and exchanging information with them.
+
+### High level overview
+
+* A node \\( A \\) randomly selects a subset \\( N \\) of nodes from a network (See [How to choose which nodes to contact](#which_nodes))
+* for each node \\( B \\) in \\( N$
+  * \\( A \\) sends some data to \\( B$
+  * \\( B \\) replies with data to \\( A$
+
+
+### Exponentially rapid convergence
+
+A nice property of certain gossip protocols is that they converge towards consensus, or if the goal isn't replication then some equilibrium state, exponentially with a probability of 1.0.
+
+
+From the [Gossip protocol types](https://en.wikipedia.org/wiki/Gossip_protocol#Gossip_protocol_types):
+> The term convergently consistent is sometimes used to describe protocols that achieve exponentially rapid spread of information. For this purpose, a protocol must propagate any new information to all nodes that will be affected by the information within time logarithmic in the size of the system (the "mixing time" must be logarithmic in system size).
+
+**TODO: More on this would be interesting. Relevant papers?**
+
+
+### For Dissemination
+
+Aka: rumor-mongering protocols.
+
+**TODO**
+
+### For Anti-entropy
+
+Anti-entropy protocols act to repair differences between replicas by comparing and reconciling those differences. Gossip protocols can be used to exchange snapshots from each node and identify differences.
+
+For example: Say that each node replicates a key/value data set and uses a [Merkle tree](merkle_trees.md) to allow differences between keys to be compared efficiently between nodes. Once the set of differing sub-trees is identified then the nodes exchange the differences for reconciliation.
+
+
+### For computation
+
+**TODO**
+
+### For exploration
+
+**TODO** Geo usecases, large scale graph exploration, etc
+
+
+### Specific approaches
+
+#### SWIM
+
+**TODO SWIM: Scalable Weakly-consistent Infection-style Process Group Membership Protocol**
+
+
+#### What Cassandra do...
+
+
+#### Epidemic Broadcast Trees
+
+These were introduced in the [Epidemic Broadcast Trees](http://homepages.gsd.inesc-id.pt/~jleitao/pdf/srds07-leitao.pdf) paper. The actual protocol is called Plugin, which stands for **push-lazy-push multicast tree**.
+
+There's a full implementation [here](https://github.com/helium/plumtree) which was extracted from [Riak Core](https://github.com/basho/riak_core). For a nice introduction see Jordan West's [RICON West 2013 task](https://www.youtube.com/watch?v=s4cCUTPU8GI) and Joao Leitao & Jordan West's [RICON 2014 talk](https://www.youtube.com/watch?v=bo367a6ZAwM).
+
+
+
+### More
+
+* [Gossip_protocol](https://en.wikipedia.org/wiki/Gossip_protocol) on Wikipedia
 * [Using Gossip Protocols for Failure Detection, Monitoring, Messaging and Other Good Things](http://highscalability.com/blog/2011/11/14/using-gossip-protocols-for-failure-detection-monitoring-mess.html)
 * http://videlalvaro.github.io/2015/12/gossip-protocols.html
-* https://greta.io/documentation/gossip
-* http://blog.dshr.org/2014/11/gossip-protocols-clarification.html
-
-
-### Epidemic Broadcast Trees
-
-* http://homepages.gsd.inesc-id.pt/~jleitao/pdf/srds07-leitao.pdf
-* https://github.com/helium/plumtree
-* [Controlled Epidemics: Riak's New Gossip Protocol and Metadata Store (Jordan West) - RICON West 2013](https://www.youtube.com/watch?v=s4cCUTPU8GI)
+* [Bimodal Multicast](https://www.cs.cornell.edu/Courses/cs614/2003SP/papers/BHO99.pdf)
+* [Bimodal Multicast over webRTC](https://greta.io/documentation/gossip)
+* [Gossip protocols: a clarification](http://blog.dshr.org/2014/11/gossip-protocols-clarification.html)
+* A Mavenized Apache V2 [gossip implementation](https://github.com/edwardcapriolo/gossip) for Java
+* "The promise, and limitations, of gossip protocols" if you can find a copy
+* See the following textbook for information about the mathematical modeling of these protocols: **The Mathematical Theory of Epidemics. N.J.T. Bailey, 1957. Griffen Press.**
 
 ## CALM: consistency as logical monotonicity
 
@@ -454,6 +538,8 @@ From [Consensus Protocols: Paxos](http://the-paper-trail.org/blog/consensus-prot
 * [Consistency Analysis in Bloom: a CALM and Collected
 Approach](http://db.cs.berkeley.edu/jmh/calm-cidr-short.pdf)
 * [The CALM Conjecture: Reasoning about Consistency](https://databeta.wordpress.com/2010/10/28/the-calm-conjecture-reasoning-about-consistency/)
+
+**TODO: Probably worth linking to an introduction of CRDTs here as the concepts are related**
 
 ## Summary
 
