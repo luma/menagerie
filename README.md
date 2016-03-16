@@ -12,3 +12,8 @@ If you find these useful feel free to fork. If you have corrections or improveme
 Where I'm quoting or referencing existing works there should always be a link back to the relevant paper or website. I may have borrowed a few images along the way, I need to review this and credit or replace as appropriate.
 
 If you notice anywhere that I haven't credited the original sources please create an issue.
+
+## TODO
+
+* Add a table of contents to each file
+* Add a task to render the markdown files to HTML so that they can be deployed to Github pages
