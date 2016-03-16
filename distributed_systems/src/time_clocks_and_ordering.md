@@ -14,22 +14,22 @@ Node1: event A happened at 09:00:03
 Node2: event B happened at 09:00:06
 ```
 
-If both nodes clocks are accurate and agree then you can say $A \rightarrow B$, or $A$ happened before $B$. If instead Node2's clock was 5sec slow relative to Node1's then $B$ actually actually happened at 09:00:01 from Node1's perspective.
+If both nodes clocks are accurate and agree then you can say \\( A \rightarrow B \\), or \\( A \\) happened before \\( B \\). If instead Node2's clock was 5sec slow relative to Node1's then \\( B \\) actually actually happened at 09:00:01 from Node1's perspective.
 
-If Node1 could know this then it could account for Node2's clock drift when ordering events. I.e. Node1 could figure out that the correct ordering is $B \rightarrow A$.
+If Node1 could know this then it could account for Node2's clock drift when ordering events. I.e. Node1 could figure out that the correct ordering is \\( B \rightarrow A \\).
 
 ## <a name="head_total_and_partial_order">Total and partial order</a>
 
-A total order means that every event can be ordered wrt every other event and is how humans usually think of ordering. This implies that if $a \rightarrow b$ and $b \rightarrow c$ then we can also infer $a \rightarrow c$.
+A total order means that every event can be ordered wrt every other event and is how humans usually think of ordering. This implies that if \\( a \rightarrow b \\) and \\( b \rightarrow c \\) then we can also infer \\( a \rightarrow c \\).
 
 A partial order means that there are at least some events that can have no meaningful order or relationship with each other.
 
 > *Definition* The relation "$\rightarrow$" on the set of events of a system is the smallest relation satisfying the following three conditions:
-> 1. If $a$ and $b$ are events in the same process, and $a$ comes before $b$, then $a \rightarrow b$.
-> 2. If $a$ is the sending of a message by one process and $b$ is the receipt of the same message by another process, then $a \rightarrow b$.
-> 3. If $a \rightarrow b$ and $b \rightarrow c$ then $a \rightarrow c$. Two distinct events $a$ and $b$ are said to be concurrent if $a \not\rightarrow b$ and $b \not\rightarrow a$.
+> 1. If \\( a \\) and \\( b \\) are events in the same process, and \\( a \\) comes before \\( b \\), then \\( a \rightarrow b \\).
+> 2. If \\( a \\) is the sending of a message by one process and \\( b \\) is the receipt of the same message by another process, then \\( a \rightarrow b \\).
+> 3. If \\( a \rightarrow b \\) and \\( b \rightarrow c \\) then \\( a \rightarrow c \\). Two distinct events \\( a \\) and \\( b \\) are said to be concurrent if \\( a \not\rightarrow b \\) and \\( b \not\rightarrow a \\).
 >
-> We assume that $a \not\rightarrow a$ for any event $a$. (Systems in which an event can happen before itself do not seem to be physically meaningful.) This implies that $\rightarrow$ is an irreflexive<sup>[1](#footnote_1)</sup> partial ordering on the set of all events in the system.
+> We assume that \\( a \not\rightarrow a \\) for any event \\( a \\). (Systems in which an event can happen before itself do not seem to be physically meaningful.) This implies that \\( \rightarrow \\) is an irreflexive<sup>[1](#footnote_1)</sup> partial ordering on the set of all events in the system.
 >
 > Another way of viewing the definition is to say that a->b means that it is possible for event a to causally affect event b. Two events are concurrent if neither can causally affect the other.
 <sup>[2](#footnote_2)</sup>
@@ -39,20 +39,20 @@ Note in #3 that if you have any distinct events then you can only have a partial
 
 Both total order and partial order are [transitive](en.wikipedia.org/wiki/Transitive_relation) and [antisymmetric](http://en.wikipedia.org/wiki/Antisymmetric_relation).
 
-if $a ≤ b \land b ≤ a$ then $a = b$ (antisymmetry);<br />
-if $a ≤ b \land b ≤ c$ then $a ≤ c$ (transitivity);
+if \\( a ≤ b \land b ≤ a \\) then \\( a = b \\) (antisymmetry);<br />
+if \\( a ≤ b \land b ≤ c \\) then \\( a ≤ c \\) (transitivity);
 
 However, a total order is [total](http://en.wikipedia.org/wiki/Total_relation):
 
 > a binary relation R over a set X is total or complete if for all a and b in X, a is related to b or b is related to a (or both).
 
-I.e. $a ≤ b \lor b ≤ a \space \forall a, b \in X$
+I.e. \\( a ≤ b \lor b ≤ a \space \forall a, b \in X$
 
 while a partial order is only [reflexive](http://en.wikipedia.org/wiki/Reflexive_relation):
 
 > a reflexive relation is a binary relation on a set for which every element is related to itself. In other words, a relation ~ on a set S is reflexive when x ~ x holds true for every x in S
 
-I.e. $a ≤ a \space \forall a \in X$
+I.e. \\( a ≤ a \space \forall a \in X$
 
 Some elements may be comparable to others, but reflexivity guarantees only that you can compare each member with itself. Notice also that totality encapsulates reflexivity; so total order is a stronger version of partial order.
 
@@ -152,10 +152,10 @@ fn main() {
 ```
 
 Lamport clocks define a [partial order](#head_total_and_partial_order), therefore `clock(a) < clock(b)` implies that either
-1. $a$ may have happened before $b$
-2. $a$ may be incomparable to $b$
+1. \\( a \\) may have happened before \\( b$
+2. \\( a \\) may be incomparable to \\( b$
 
-For #2, $a$ and $b$ maybe from different causal histories. Lamport clocks can only model a single history so events from other histories may cause concurrent events to appear ordered when they aren't.
+For #2, \\( a \\) and \\( b \\) maybe from different causal histories. Lamport clocks can only model a single history so events from other histories may cause concurrent events to appear ordered when they aren't.
 
 Consider a three node system where nodes 1 and 2 are communicating with each other, as are nodes 1 and 3. As 2 and 3 never actually communicate with each other those two histories (1 <-> 2 and 1 <-> 3) are separate, concurrent, and cannot be meaningfully ordered against each other.
 

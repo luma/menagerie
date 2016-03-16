@@ -54,10 +54,10 @@ Definition:
 > Consensus is the problem of having a set of processes agree on a value proposed by one of those processes
 
 All consensus methods must fulfill the following properties:
-* **Agreement**: all nodes in $N$ decide on the same value (safety property)
+* **Agreement**: all nodes in \\( N \\) decide on the same value (safety property)
 * **Termination**: all non-faulty nodes eventually reach a decision (liveness property)
-* **Validity**: if all non-faulty nodes decide $v$, then $v$ must have been proposed by some node in $N$ (non-triviality property)
-* **Integrity**: every node in $N$ decides at most one value $v$, and $v$ is the "right" value (safety property)
+* **Validity**: if all non-faulty nodes decide \\( v \\), then \\( v \\) must have been proposed by some node in \\( N \\) (non-triviality property)
+* **Integrity**: every node in \\( N \\) decides at most one value \\( v \\), and \\( v \\) is the "right" value (safety property)
 
 
 
@@ -167,8 +167,8 @@ Other methods (like 2-phase-commit) add extra rounds of messaging to strengthen 
 
 2PC could be simplified to:
 
-1. The coordinator node contacts every other node, suggests a value, and gathers their responses ($proposal$ phase, $commit-request$ phase, or $voting$ phase)
-2. The coordinator nodes all nodes again. If all the nodes agreed then the coordinator tells the nodes to $commit$, otherwise tell the nodes $abort$ ($commit$-$or$-$abort$ phase)
+1. The coordinator node contacts every other node, suggests a value, and gathers their responses ($proposal \\) phase, \\( commit-request \\) phase, or \\( voting \\) phase)
+2. The coordinator nodes all nodes again. If all the nodes agreed then the coordinator tells the nodes to \\( commit \\), otherwise tell the nodes \\( abort \\) ($commit$-$or$-$abort \\) phase)
 
 The coordinator doesn't need to be elected, any node can kick off a round of 2PC.
 
@@ -193,9 +193,9 @@ An * next to the record type means that the record is forced to stable storage.
 
 2PC is a CA protocol so it does not tolerate network partitions. It's also a blocking protocol. If the coordinator fails permanently then some of the cohorts may not complete their transactions as they will be waiting on the coordinator to take some action.
 
-If the coordinator is in the $proposal$ phase and crashes after sending proposals to some of the cohorts then those cohorts will be blocked until the coordinator recovers.
+If the coordinator is in the \\( proposal \\) phase and crashes after sending proposals to some of the cohorts then those cohorts will be blocked until the coordinator recovers.
 
-If the coordinator is in the $commit$-$or$-$abort$ phase and crashes then every cohort will stall until they receive either a commit or a rollback.
+If the coordinator is in the \\( commit$-$or$-$abort \\) phase and crashes then every cohort will stall until they receive either a commit or a rollback.
 
 In both of these scenarios the coordinator remaining down could mean that the system can't begin another round of 2PC.
 
@@ -463,10 +463,10 @@ Fundamentally, gossip protocols involve periodically contacting some subset of n
 
 ### High level overview
 
-* A node $A$ randomly selects a subset $N$ of nodes from a network (See [How to choose which nodes to contact](#which_nodes))
-* for each node $B$ in $N$
-  * $A$ sends some data to $B$
-  * $B$ replies with data to $A$
+* A node \\( A \\) randomly selects a subset \\( N \\) of nodes from a network (See [How to choose which nodes to contact](#which_nodes))
+* for each node \\( B \\) in \\( N$
+  * \\( A \\) sends some data to \\( B$
+  * \\( B \\) replies with data to \\( A$
 
 
 ### Exponentially rapid convergence

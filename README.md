@@ -16,4 +16,3 @@ If you notice anywhere that I haven't credited the original sources please creat
 ## TODO
 
 * Add a table of contents to each file
-* Add a task to render the markdown files to HTML so that they can be deployed to Github pages
