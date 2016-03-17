@@ -15,4 +15,4 @@ If you notice anywhere that I haven't credited the original sources please creat
 
 ## TODO
 
-* Add a table of contents to each file
+* break up replication and consensus into several smaller sections: 1. general results 2. multi-phase commit 3. state replication 4. gossip protocols 5. CALM 6. Summary

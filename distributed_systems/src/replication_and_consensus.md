@@ -133,6 +133,8 @@ A walkthrough of the proof: [A Brief Tour of FLP Impossibility](http://the-paper
 
 ## Strong vs eventual consistency with consensus
 
+@TODO
+
 ## Master-slave replication
 
 Aka: Primary/backup replication, primary copy replication, or log shipping

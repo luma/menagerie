@@ -24,7 +24,7 @@ A total order means that every event can be ordered wrt every other event and is
 
 A partial order means that there are at least some events that can have no meaningful order or relationship with each other.
 
-> *Definition* The relation "$\rightarrow$" on the set of events of a system is the smallest relation satisfying the following three conditions:
+> *Definition* The relation "\\( \rightarrow \\)" on the set of events of a system is the smallest relation satisfying the following three conditions:
 > 1. If \\( a \\) and \\( b \\) are events in the same process, and \\( a \\) comes before \\( b \\), then \\( a \rightarrow b \\).
 > 2. If \\( a \\) is the sending of a message by one process and \\( b \\) is the receipt of the same message by another process, then \\( a \rightarrow b \\).
 > 3. If \\( a \rightarrow b \\) and \\( b \rightarrow c \\) then \\( a \rightarrow c \\). Two distinct events \\( a \\) and \\( b \\) are said to be concurrent if \\( a \not\rightarrow b \\) and \\( b \not\rightarrow a \\).
