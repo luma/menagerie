@@ -1,4 +1,4 @@
-# Causality and optimistic replication
+# Consensus: Causality and optimistic replication
 
 ## Upper Bound and Least Upper Bound (LUB)
 

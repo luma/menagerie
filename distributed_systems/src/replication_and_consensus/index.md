@@ -169,8 +169,8 @@ Other methods (like 2-phase-commit) add extra rounds of messaging to strengthen 
 
 2PC could be simplified to:
 
-1. The coordinator node contacts every other node, suggests a value, and gathers their responses ($proposal \\) phase, \\( commit-request \\) phase, or \\( voting \\) phase)
-2. The coordinator nodes all nodes again. If all the nodes agreed then the coordinator tells the nodes to \\( commit \\), otherwise tell the nodes \\( abort \\) ($commit$-$or$-$abort \\) phase)
+1. The coordinator node contacts every other node, suggests a value, and gathers their responses (\\(proposal \\) phase, \\( commit-request \\) phase, or \\( voting \\) phase)
+2. The coordinator nodes all nodes again. If all the nodes agreed then the coordinator tells the nodes to \\( commit \\), otherwise tell the nodes \\( abort \\) (\\(commit$-$or$-$abort \\) phase)
 
 The coordinator doesn't need to be elected, any node can kick off a round of 2PC.
 
