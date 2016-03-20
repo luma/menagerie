@@ -27,9 +27,9 @@ Fundamentally, gossip protocols involve periodically contacting some subset of n
 ### High level overview
 
 * A node \\( A \\) randomly selects a subset \\( N \\) of nodes from a network (See [How to choose which nodes to contact](#which_nodes))
-* for each node \\( B \\) in \\( N$
-  * \\( A \\) sends some data to \\( B$
-  * \\( B \\) replies with data to \\( A$
+* for each node \\( B \\) in \\( N \\)
+  * \\( A \\) sends some data to \\( \\)
+  * \\( B \\) replies with data to \\( A \\)
 
 
 ### Exponentially rapid convergence
