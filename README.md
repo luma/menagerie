@@ -28,8 +28,10 @@ If you notice anywhere that I haven't credited the original sources please creat
 * Dotted Vector Versions
 * Atomic clocks, Spanner, and the TrueTime api
 
+
 ### Replication and Consensus
 * gossip protocols
 * write some gossip example code
 * CALM
+* multi-paxos, fast paxos, generalized paxos, RAFT, ZAB
 * summary
