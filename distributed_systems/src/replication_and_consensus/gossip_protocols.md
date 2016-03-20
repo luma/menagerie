@@ -20,9 +20,6 @@ If the language used makes it sound almost like a virus being spread then that's
 
 Gossip protocols are actually very common. For example the Internet's routing protocols have gossip like behaviour.
 
-### <a name='which_nodes'>How to choose which nodes to contact</a>
-
-Fundamentally, gossip protocols involve periodically contacting some subset of nodes, either from the total set of nodes, or from the set of neighbours, and exchanging information with them.
 
 ### High level overview
 
@@ -30,6 +27,12 @@ Fundamentally, gossip protocols involve periodically contacting some subset of n
 * for each node \\( B \\) in \\( N \\)
   * \\( A \\) sends some data to \\( B \\)
   * \\( B \\) replies with data to \\( A \\)
+
+### <a name='which_nodes'>How to choose which nodes to contact</a>
+
+Fundamentally, gossip protocols involve periodically contacting some subset of nodes, either from the total set of nodes, or from the set of neighbours, and exchanging information with them.
+
+@TODO more specific strategies
 
 
 ### Exponentially rapid convergence
@@ -49,11 +52,13 @@ Aka: rumor-mongering protocols.
 
 **TODO**
 
-### For Anti-entropy
+### For Anti-entropy (replication)
 
 Anti-entropy protocols act to repair differences between replicas by comparing and reconciling those differences. Gossip protocols can be used to exchange snapshots from each node and identify differences.
 
-For example: Say that each node replicates a key/value data set and uses a [Merkle tree](merkle_trees.md) to allow differences between keys to be compared efficiently between nodes. Once the set of differing sub-trees is identified then the nodes exchange the differences for reconciliation.
+For example: Say that each node replicates a key/value data set and uses a [Merkle tree](merkle_trees.html) to allow differences between keys to be compared efficiently between nodes. Once the set of differing sub-trees is identified then the nodes exchange the differences for reconciliation.
+
+@TODO: active and passive Anti-entropy.
 
 
 ### For computation
