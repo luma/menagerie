@@ -77,7 +77,7 @@ For example: Say that each node replicates a key/value data set and uses a [Merk
 
 #### Epidemic Broadcast Trees
 
-These were introduced in the [Epidemic Broadcast Trees](http://homepages.gsd.inesc-id.pt/~jleitao/pdf/srds07-leitao.pdf) paper. The actual protocol is called Plugin, which stands for **push-lazy-push multicast tree**.
+These were introduced in the [Epidemic Broadcast Trees](http://homepages.gsd.inesc-id.pt/~jleitao/pdf/srds07-leitao.pdf) paper. The actual protocol is called Plumtree, which stands for **push-lazy-push multicast tree**.
 
 There's a full implementation [here](https://github.com/helium/plumtree) which was extracted from [Riak Core](https://github.com/basho/riak_core). For a nice introduction see Jordan West's [RICON West 2013 task](https://www.youtube.com/watch?v=s4cCUTPU8GI) and Joao Leitao & Jordan West's [RICON 2014 talk](https://www.youtube.com/watch?v=bo367a6ZAwM).
 
