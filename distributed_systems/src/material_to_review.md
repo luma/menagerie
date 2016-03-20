@@ -2,7 +2,8 @@
 
 * http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-824-distributed-computer-systems-engineering-spring-2006/index.htm
 * http://bravenewgeek.com/from-the-ground-up-reasoning-about-distributed-systems-in-the-real-world/
-* https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing
+* [Fallacies of distributed computing](https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing)
+* [Fallacies of distributed computing explained](http://www.rgoarchitects.com/Files/fallacies.pdf)
 * http://web.mit.edu/Saltzer/www/publications/endtoend/endtoend.pdf
 * http://www.enterpriseintegrationpatterns.com/docs/IEEE_Software_Design_2PC.pdf
 * http://highscalability.com/blog/2015/10/12/making-the-case-for-building-scalable-stateful-services-in-t.html
@@ -14,8 +15,6 @@
 * [Distributed systems theory for the distributed systems engineer](http://the-paper-trail.org/blog/distributed-systems-theory-for-the-distributed-systems-engineer/)
 * [Notes on Distributed Systems for Young Bloods](https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods/)
 * [A Note on Distributed Computing](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.41.7628&rep=rep1&type=pdf)
-* [Fallacies of distributed computing](https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing)
-* [Fallacies of distributed computing explained](http://www.rgoarchitects.com/Files/fallacies.pdf)
 * [Designs, Lessons and Advice from Building Large Distributed Systems](http://www.cs.cornell.edu/projects/ladis2009/talks/dean-keynote-ladis2009.pdf)
 * [Readings in Distributed Systems
 Systems](http://henryr.github.io/distributed-systems-readings/)

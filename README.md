@@ -15,4 +15,21 @@ If you notice anywhere that I haven't credited the original sources please creat
 
 ## TODO
 
+* failure
+* fault tolerance
+* consistent hashing
+* merkle trees
+* CRDTs
+* testing
+* hyperspace hashing
+* security
+
+### Time, clocks, and ordering
+* Dotted Vector Versions
+* Atomic clocks, Spanner, and the TrueTime api
+
+### Replication and Consensus
+* gossip protocols
 * write some gossip example code
+* CALM
+* summary
