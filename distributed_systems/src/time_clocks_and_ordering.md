@@ -442,6 +442,7 @@ With the above caveats, this approach will correctly trace causality among concu
 * Technical Report: HybridTime - Accessible Global Consistency with High Clock Uncertainty
 * http://blog.acolyer.org/2016/02/15/a-short-note-on-atomicity-and-ordering/
 * Dotted Version Vectors: Logical Clocks for Optimistic Replication
+* [The CRON principle](https://databeta.wordpress.com/2010/12/03/the-cron-princ)iple/
 
 ## Notes
 
