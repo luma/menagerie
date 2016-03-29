@@ -1,10 +1,11 @@
-# Distributed Systems Notes
+# Notes on Distributed Systems
 
 * [Hello!](./hello.md)
 * [Fundamental results](./fundamental_results.md)
 * [Time, Clocks, and Ordering](time_clocks_and_ordering.md)
 * [CAP](consistency_availability_and_partition_tolerence.md)
 * [Replication and consensus](replication_and_consensus/index.md)
+* [Master-slave replication](replication_and_consensus/master_slave_replication.md)
 * [multi-phase commit](replication_and_consensus/multi_phase_commit.md)
 * [state machine replication](replication_and_consensus/state_machine_replication.md)
 * [gossip protocols](replication_and_consensus/gossip_protocols.md)
@@ -14,6 +15,7 @@
 * [Bounds](bounds.md)
 * [Failure](failure.md)
 * [Fault tolerance](fault_tolerance.md)
+* [Distributed Hash Table](dht.md)
 * [Messaging](messaging.md)
 * [Merkle trees](merkle_trees.md)
 * [Consistent Hashing](consistent_hashing.md)

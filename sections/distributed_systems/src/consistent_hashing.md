@@ -2,6 +2,12 @@
 
 ## The problem we want to solve
 
+* being able to know which nodes handle which resources without any further messaging or coordination
+
+## The Naïve solution: Sharding
+
+* one line summary
+* what problems does it have
 
 ## Overview
 
@@ -9,11 +15,10 @@
 ## Walkthrough
 
 
-## Other approaches: Sharding
+## Virtual Nodes
 
-* one line summary
-* what problems does it have that Consistent hashing doesn't?
-
+* http://ivoroshilin.com/2013/07/15/distributed-caching-under-consistent-hashing/
+* https://github.com/mixu/vnodehash
 
 ## Other approaches: Rendezvous Hashing
 

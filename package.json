@@ -7,8 +7,11 @@
   "main": "lib/index.js",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
-    "start": "open book/distributed_systems/index.html",
-    "build": "cd distributed_systems/ && mdbook build .",
+    "start": "open book/index.html",
+    "buildIndex": "node ./index/build.js",
+    "buildDistributedSystems": "mdbook build ./sections/distributed_systems/",
+    "buildSoftwareDevPractices": "mdbook build ./sections/software_development_practices/",
+    "build": "npm run buildIndex && npm run buildDistributedSystems && npm run buildSoftwareDevPractices",
     "lint": "eslint examples/**/*.js",
     "2pc": "babel-node examples/2pc/index.js | ./node_modules/.bin/bunyan"
   },
@@ -34,9 +37,12 @@
     "babel-preset-stage-2": "^6.3.13",
     "babel-preset-stage-3": "^6.3.13",
     "babel-register": "^6.4.3",
+    "bluebird": "^3.3.4",
     "bunyan": "^1.7.0",
     "eslint": "1.10.3",
     "eslint-config-es6": "luma/eslint-config-es6",
-    "eslint-plugin-require-path-exists": "^1.0.15"
+    "eslint-plugin-require-path-exists": "^1.0.15",
+    "fs-extra": "^0.26.7",
+    "markdown": "^0.5.0"
   }
 }

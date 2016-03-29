@@ -1,6 +1,6 @@
 {
-  "title": "Distributed Systems notes",
+  "title": "Distributed Systems",
   "author": "Rolly Fordham",
   "description": "My notes on various distributed systems topics",
-  "dest": "../book/distributed_systems"
+  "dest": "../../book/distributed_systems"
 }
