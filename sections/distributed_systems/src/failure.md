@@ -1,5 +1,7 @@
 ## Failures in a distributed system
 
+http://blog.acolyer.org/2016/02/10/how-complex-systems-fail/
+
 Types of failures:
 * Node failure
 * Network partition

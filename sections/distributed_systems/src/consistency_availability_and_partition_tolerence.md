@@ -16,12 +16,13 @@ Aka: Consistency, availability, and partition tolerance
 
 * [Rethinking Eventual Consistency](http://research.microsoft.com/pubs/192621/sigtt611-bernstein.pdf)
 
-
 ### Strong
 
 ### Weak
 
 ### Eventual
+
+Live: yes. safety: *shrugs*
 
 * [How consistent is eventual consistency?](http://the-paper-trail.org/blog/how-consistent-is-eventual-consistency/)
 * [PBS: Probabilistically Bounded Staleness](http://pbs.cs.berkeley.edu/#demo)
@@ -29,6 +30,8 @@ Aka: Consistency, availability, and partition tolerance
 
 
 ### Strong eventual
+
+* [Strong eventual consistency](https://en.wikipedia.org/wiki/Eventual_consistency#Strong_eventual_consistency)
 
 
 ## Availability

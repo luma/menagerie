@@ -11,7 +11,8 @@
     "buildIndex": "node ./index/build.js",
     "buildDistributedSystems": "mdbook build ./sections/distributed_systems/",
     "buildSoftwareDevPractices": "mdbook build ./sections/software_development_practices/",
-    "build": "npm run buildIndex && npm run buildDistributedSystems && npm run buildSoftwareDevPractices",
+    "buildComputerScience": "mdbook build ./sections/computer_science/",
+    "build": "npm run buildIndex && npm run buildComputerScience && npm run buildDistributedSystems && npm run buildSoftwareDevPractices",
     "lint": "eslint examples/**/*.js",
     "2pc": "babel-node examples/2pc/index.js | ./node_modules/.bin/bunyan"
   },

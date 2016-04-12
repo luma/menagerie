@@ -12,6 +12,7 @@
 * [CRDTs](replication_and_consensus/crdts.md)
 * [consistency as logical monotonicity](replication_and_consensus/calm.md)
 * [Replication and consensus: Summary](replication_and_consensus/summary.md)
+* [ACID in a distributed world](acid.md)
 * [Bounds](bounds.md)
 * [Failure](failure.md)
 * [Fault tolerance](fault_tolerance.md)

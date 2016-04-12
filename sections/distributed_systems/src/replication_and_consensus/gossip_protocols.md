@@ -69,6 +69,9 @@ For example: Say that each node replicates a key/value data set and uses a [Merk
 
 **TODO** Geo usecases, large scale graph exploration, etc
 
+### Limitations and issues
+
+* http://kellabyte.com/2013/11/04/the-network-partitions-are-rare-fallacy/
 
 ### Specific approaches
 
