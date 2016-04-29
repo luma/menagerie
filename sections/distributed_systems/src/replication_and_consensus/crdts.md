@@ -11,3 +11,7 @@ Aka: Commutative Replicated Data Types
 * https://github.com/aphyr/meangirls#lww-element-set
 * https://github.com/soundcloud/roshi
 * Reading and read repair from https://github.com/soundcloud/roshi/tree/master/farm and https://en.wikipedia.org/wiki/Symmetric_difference
+* [Delta State Replicated Data Types](https://blog.acolyer.org/2016/04/25/delta-state-replicated-data-types/)
+* [A Comprehensive study of Convergent and Commutative Replicated Data Types](https://blog.acolyer.org/2015/03/18/a-comprehensive-study-of-convergent-and-commutative-replicated-data-types/)
+* [Lasp: A language for distributed, coordination-free programming](https://blog.acolyer.org/2015/08/17/lasp-a-language-for-distributed-coordination-free-programming/)
+* [Derflow: Distributed Deterministic Dataflow programming for Erlang](https://blog.acolyer.org/2014/12/19/derflow-distributed-deterministic-dataflow-programming-for-erlang/)

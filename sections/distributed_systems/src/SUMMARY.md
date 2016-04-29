@@ -21,6 +21,7 @@
 * [Merkle trees](merkle_trees.md)
 * [Consistent Hashing](consistent_hashing.md)
 * [Hyperspace Hashing](hyperspace_hashing.md)
+* [Network latency](network_latency.md)
 * [Security](security.md)
 * [Testing](testing.md)
 * [Material to review](material_to_review.md)
