@@ -15,3 +15,7 @@ Aka: Commutative Replicated Data Types
 * [A Comprehensive study of Convergent and Commutative Replicated Data Types](https://blog.acolyer.org/2015/03/18/a-comprehensive-study-of-convergent-and-commutative-replicated-data-types/)
 * [Lasp: A language for distributed, coordination-free programming](https://blog.acolyer.org/2015/08/17/lasp-a-language-for-distributed-coordination-free-programming/)
 * [Derflow: Distributed Deterministic Dataflow programming for Erlang](https://blog.acolyer.org/2014/12/19/derflow-distributed-deterministic-dataflow-programming-for-erlang/)
+* "Collaborative offline web applications using conflict-free replicated data types"
+* [On The Composability of the Riak DT Map: Expanding From Embedded To Multi-Key Structures](https://speakerdeck.com/cmeiklejohn/on-the-composability-of-the-riak-dt-map-expanding-from-embedded-to-multi-key-structures)
+* [Incremental  Stream  Processing  using
+Computational  Conflict-free  Replicated  Data  Types](http://asc.di.fct.unl.pt/~nmp/pubs/clouddp-2013.pdf)

@@ -19,3 +19,7 @@
 * [Readings in Distributed Systems
 Systems](http://henryr.github.io/distributed-systems-readings/)
 * [MacroBase: Analytic Monitoring for the Internet of Things](http://blog.acolyer.org/2016/03/16/macrobase-analytic-monitoring-for-the-internet-of-things/)
+
+* https://www.youtube.com/watch?v=K76WZkkBO2c
+* https://www.youtube.com/watch?v=vW8pN07cH8M
+* https://www.youtube.com/watch?v=H0i_bXKwujQ
