@@ -7,7 +7,7 @@
   "main": "lib/index.js",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
-    "start": "open book/index.html",
+    "start": "./open.sh",
     "buildIndex": "node ./index/build.js",
     "buildDistributedSystems": "mdbook build ./sections/distributed_systems/",
     "buildSoftwareDevPractices": "mdbook build ./sections/software_development_practices/",
@@ -25,7 +25,8 @@
     "url": "git://github.com/luma/notes.git"
   },
   "dependencies": {
-    "babel-polyfill": "^6.3.14"
+    "babel-polyfill": "^6.3.14",
+    "toml": "^2.3.3"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
