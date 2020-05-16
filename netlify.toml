@@ -1,0 +1,4 @@
+[build]
+  base = ""
+  command = "make netlify"
+  publish = "book/"
