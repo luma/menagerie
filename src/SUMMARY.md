@@ -16,6 +16,8 @@
   - [ACID in a distributed world](./distributedSystems/acid.md)
   - [Bounds](./distributedSystems/bounds.md)
   - [Failure](./distributedSystems/failure.md)
+    - [Failure Detection](./distributedSystems/failureDetection/index.md)
+    - [The φ Accrual Failure Detector](./distributedSystems/failureDetection/phiAccrualFailureDetectors.md)
   - [Fault tolerance](./distributedSystems/fault_tolerance.md)
   - [Distributed Hash Table](./distributedSystems/dht.md)
   - [Messaging](./distributedSystems/messaging.md)

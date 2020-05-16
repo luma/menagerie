@@ -1,8 +1,9 @@
-## Failures in a distributed system
+# Failures in a distributed system
 
 http://blog.acolyer.org/2016/02/10/how-complex-systems-fail/
 
 Types of failures:
+
 * Node failure
 * Network partition
 
@@ -32,6 +33,8 @@ https://en.wikipedia.org/wiki/Byzantine_fault_tolerance
 
 
 ## Failure Detection
+
+- [The φ Accrual Failure Detector](./failureDetection/phiAccrualFailureDetectors.md)
 
 @TODO
 
