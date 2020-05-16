@@ -21,17 +21,17 @@ So of a finite set of real numbers you could construct an infinitely large numbe
 
 E.g.
 
-Let \\( S = \left \{ 0, 1, 2, 3 \} \right \\)
+Let \\( S =\\{ 0, 1, 2, 3 \\} \\)
 
-Then we could construct a (finite) set of upper bounds like \\( A = \left\{ {4, 5, 6} \right\} \\). We could have also chosen any of the following:
-* \\( \left\{ {3, 4, 5, 6} \right\} \\)
-* \\( \left\{ {5, 6} \right\} \\)
-* \\( \left\{ {6} \right\} \\)
+Then we could construct a (finite) set of upper bounds like \\( A =\\{ 4, 5, 6 \\} \\). We could have also chosen any of the following:
+* \\(\\{ 3, 4, 5, 6 \\} \\)
+* \\(\\{ 5, 6 \\} \\)
+* \\(\\{ 6 \\} \\)
 
 They are all sets of numbers that fulfill the definition of an upper bound.
 
-Based on the first definition of \\( A \\) would the least upper bound be \\( \left\{ {3, 4} \right\} \\) or \\( \left\{ {3} \right\} \\)?
+Based on the first definition of \\( A \\) would the least upper bound be \\(\\{ 3, 4 \\} \\) or \\(\\{ 3 \\} \\)?
 
 Basically, when deciding what are least upper bounds can you consider a subset of possible upper bounds rather than set of all possible ones.
 
-If the former is possible then the various different sets of upper bounds can have different sets of LUBs. If the latter is true then it seems like the LUB will always be \\( {3} \\) for all of the above examples.
+If the former is possible then the various different sets of upper bounds can have different sets of LUBs. If the latter is true then it seems like the LUB will always be \\(\\{ 3 \\}\\) for all of the above examples.
