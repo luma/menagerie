@@ -1,0 +1,14 @@
+[book]
+title = "Computer science"
+author = "Rolly Fordham"
+description = "My notes on various computer science topics"
+
+[build]
+destination = "../../book/computer_science"
+create-missing = true
+
+[output.html]
+mathjax-support = true
+
+[output.html.search]
+limit-results = 15

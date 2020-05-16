@@ -1,0 +1,14 @@
+[book]
+title = "Software development practices"
+author = "Rolly Fordham"
+description = "My notes on various software developement topics"
+
+[build]
+destination = "../../book/software_development_practices"
+create-missing = true
+
+[output.html]
+mathjax-support = true
+
+[output.html.search]
+limit-results = 15

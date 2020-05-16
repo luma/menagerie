@@ -1,0 +1,14 @@
+[book]
+title = "Distributed Systems"
+author = "Rolly Fordham"
+description = "My notes on various distributed systems topics"
+
+[build]
+destination = "../../book/distributed_systems"
+create-missing = true
+
+[output.html]
+mathjax-support = true
+
+[output.html.search]
+limit-results = 15

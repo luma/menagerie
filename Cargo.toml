@@ -1,0 +1,10 @@
+[package]
+name = "menagerie"
+version = "0.1.0"
+authors = ["Rolly Fordham <rolly@luma.co.nz>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+mdbook = "0.3.7"

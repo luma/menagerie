@@ -1,29 +1,8 @@
-# Logs
-logs
-*.log
-
-# Runtime data
-pids
-*.pid
-*.seed
-
-# general reports dir for coverage, instrumentation, etc
-reports
-
-# node-waf configuration
-.lock-wscript
-
-# Compiled binary addons (http://nodejs.org/api/addons.html)
-build/Release
-
-book/
+book
 
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 
-lib/
-examples/lib/
-tmp/logs
-
-.DS_Store
+#Added by cargo
+/target
