@@ -50,7 +50,7 @@ Assume now that some of the workers might crash (for simplicity, we assume that 
 >
 > Finally, when reaching a high threshold, the confidence that p w has crashed is high, so the master removes \\(p_w\\) from its list of available workers and releases all corresponding resources. Using conventional failure detectors to implement such a simple behaviour would be quite a challenge.
 
-## Failure Detectors: Basic concepts &  implementations
+## Failure Detectors: Basic concepts & implementations
 
 In a distributed computing system, a failure detector is a computer application or a subsystem that is responsible for the detection of node failures or crashes.
 
@@ -90,12 +90,12 @@ accuracy of a failure-detector. Throughout the paper, all accuracy metrics are d
 
 There are two primary accuracy metrics:
 
-**Mistake recurrence time (\\(T_MR\\)):** this measures the time between two consecutive mistakes. More precisely, \\(T_MR\\) is a random variable representing the time that elapses from an S-transition to the next one. (Fig. 4)
+**Mistake recurrence time (\\(T_{MR}\\)):** this measures the time between two consecutive mistakes. More precisely, \\(T_{MR}\\) is a random variable representing the time that elapses from an S-transition to the next one. (Fig. 4)
 
 **Mistake duration (\\(T_M\\)):** this measures the time it takes the failure detector to correct a mistake. More precisely, \\(T_M\\) is a random variable representing the time that elapses from an S-transition to the next 
 T-transition. (Fig. 4)
 
-As we discussed in the introduction, there are many aspects of failure detector accuracy that may be important to applications. Thus, in addition to \\(T_MR\\) and \\(T_M\\) , we propose four other accuracy metrics in the next section. We selected \\(T_MR\\) and \\(T_M\\) as the primary metrics because, given these two, one can compute the other four.
+As we discussed in the introduction, there are many aspects of failure detector accuracy that may be important to applications. Thus, in addition to \\(T_{MR}\\) and \\(T_M\\) , we propose four other accuracy metrics in the next section. We selected \\(T_{MR}\\) and \\(T_M\\) as the primary metrics because, given these two, one can compute the other four.
 
 ![images/fig4_Figure_4._Mistake_duration_T_M__good_period_duration_T_G__and_mistake_recurrence_time_T_MR.png](images/fig4_Figure_4._Mistake_duration_T_M__good_period_duration_T_G__and_mistake_recurrence_time_T_MR.png)
 
@@ -137,10 +137,32 @@ Heartbeat messages is a common approach to implementing failure detectors.
 
 It works as follows
 
-1. A monitor process (`p`) sends a heartbeat message to process `q`, informing `q` that `p` is still alive. The period is called the heartbeat interval \\(\Delta i\\)
-2. 
+1. A monitor process (`p`) sends a heartbeat message to process `q`, informing `q` that `p` is still alive. The period is called the heartbeat interval \\(\Delta_i\\).
+2. Process `q` suspects process `p` if it fails to receive any heartbeats message from `p` for a period of time determined by a timeout \\(\Delta_{to}\\), with \\(\Delta_{to} >= \Delta_i\\).
+
+A third value of importance is the network transmission delay of message. We track the average transmission time experienced by messages as \\(\Delta_{tr}\\). 
+
+Traditionally, heartbeat based protocols use a fixed value for the timeout \\(\Delta_{to}\\).
+
+The choice of timeout must be larger than \\(\Delta_i\\). How much larger \\(\Delta_{to}\\) is than \\(\Delta_i\\) controls the responsiveness of the detector, but also the likelihood of false positives. This is pretty intuitive: the quicker the timeout the earlier the detector will suspect the process, but the likelihood that it's a false positive caused by network conditions (remember "unreliable failure detectors" and you can never trust the network to be reliable) is also increased.
+
+Having \\(\Delta_{to}\\) be much larger than \\(\Delta_i\\) reduces the possibility of false positives but comes as the expense of detection time.
+
+Alternate implementations of heartbeat failure detections make the timeout dynamic by taking into account the transmission time of the hearbeat itself. This bounds the max detection time but also relies on measuring time with minimal drift and having shared knowledge of the \\(\Delta_i\\).
+
+Having accurate knowledge of \\(\Delta_i\\) can be tricky, particularly with smaller values. Delays in processing/transmission and timing inaccuracies (at the OS level) mean that the actual time can differ from the target one.
+
+Both of these approaches have merit.
+
+> **Note** A straightforward implementation requires synchronized clocks. Chen et al. <sup>[3](#footnote_3)</sup> show how to do it with unsynchronized clocks, but this
+still requires a negligible drift between the clocks.
+
 
 ![images/fig_heartbeat_1.png](images/fig_heartbeat_1.png)
+
+### Adaptive failure detectors
+
+
 
 ### Accrual failure detectors
 
