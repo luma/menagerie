@@ -31,23 +31,3 @@ https://en.wikipedia.org/wiki/Byzantine_fault_tolerance
 [Byzantine Generals in Action: Implementing Fail-Stop Processors](https://www.cs.cornell.edu/fbs/publications/ByzGensInAction.pdf)
 [The real Byzantine Generals](https://www.researchgate.net/publication/4122503_The_real_Byzantine_Generals)
 
-
-## Failure Detection
-
-- [The φ Accrual Failure Detector](./failureDetection/phiAccrualFailureDetectors.md)
-
-@TODO
-
-* Further reading from [ Distributed systems for fun and profit](http://book.mixu.net/distsys/time.html)
-* http://blog.acolyer.org/2014/11/07/highly-available-transactions-virtues-and-limitations/
-
-
-### The Phi Accrual Failure Detector
-
-* [The Phi Accrual Failure Detector](www.jaist.ac.jp/~defago/files/pdf/IS_RR_2004_010.pdf)
-* Port of Akka's Accrual Failure Detector to [Node.js](www.npmjs.com/package/phi-accrual-detector)
-* [Cassandra and its Accrual Failure Detector](http://ljungblad.nu/post/44006928392/cassandra-and-its-accrual-failure-detector)
-
-### Using Gossip
-
-* [Using Gossip Protocols for Failure Detection, Monitoring, Messaging and Other Good Things](http://highscalability.com/blog/2011/11/14/using-gossip-protocols-for-failure-detection-monitoring-mess.html)

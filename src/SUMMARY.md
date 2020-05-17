@@ -18,6 +18,7 @@
   - [Failure](./distributedSystems/failure.md)
     - [Failure Detection](./distributedSystems/failureDetection/index.md)
     - [The φ Accrual Failure Detector](./distributedSystems/failureDetection/phiAccrualFailureDetectors.md)
+    - [Gossip Based Failure Detectors](./distributedSystems/failureDetection/gossipBased.md)
   - [Fault tolerance](./distributedSystems/fault_tolerance.md)
   - [Distributed Hash Table](./distributedSystems/dht.md)
   - [Messaging](./distributedSystems/messaging.md)
